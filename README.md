@@ -1,8 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## microCMS, Next.js, Typescript を用いたマイクロブログシステム
 
-## Getting Started
+## 使用言語
 
-First, run the development server:
+Next.js13, Typescript
+
+## このシステムの概要
+
+ヘッドレス CMS による blog システム
+
+ヘッドレス CMS は microCMS を使用。
+ヘッドレス CMS については `microCMS公式ページ`(https://microcms.io/) を御覧ください。
+
+## 用意するもの
+
+1. 上位フォルダに「.env.local」ファイルを作成。
+2. 下記のようにする。
+
+```bash
+API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXX
+SERVICE_DOMAIN=XXXXXXXXX
+```
+
+3. API_KEY と SERVICE_DOMAIN 取得方法は microCMS 公式ページ(https://microcms.io/) を参照。
+
+## 起動方法
 
 ```bash
 npm run dev
@@ -12,27 +33,6 @@ yarn dev
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## その他
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+今回 app フォルダは使用しておりません。
