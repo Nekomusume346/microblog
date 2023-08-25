@@ -1,20 +1,18 @@
 import Image from 'next/image'
-import Link from 'next/link'
-import { Inter } from 'next/font/google'
-import { Blog } from "@/types/blog";
-import { client } from "@/libs/client";
+import Link from 'next/link';
 import Pagination from '@/components/pagination';
+import { client } from "@/libs/client";
+import { Blog } from "@/types/blog";
 
-
-const inter = Inter({ subsets: ['latin'] })
+const PER_PAGE = 3; 
 
 type Props = {
-  blogs: Blog[];
-  totalCount: number;
-};
+    blogs: Blog[];
+    totalCount: number;
+  };
 
-//topページ
-export default function Home({ blogs, totalCount }: Props) {
+// pages/blog/[id].js
+export default function BlogPageId({ blogs, totalCount }: Props) {
 
   return (
     <>
@@ -47,22 +45,24 @@ export default function Home({ blogs, totalCount }: Props) {
         ))}      
     </div>
 
-    <div className='flex justify-center items-center mx-auto w-full'>
-      <Pagination totalCount={totalCount} />      
-    </div>     
 
     </>
 
-  )
+  );
 }
 
+// 動的なページを作成
+export const getStaticPaths = async () => {
+  const data = await client.get({ endpoint: "categories" });
+  const paths = data.contents.map((content: any) => `/blog/category/${content.id}`);
 
+  return { paths, fallback: false };
+};
 
-// データをテンプレートに受け渡す部分の処理を記述します
-export const getStaticProps = async () => {
-  //const data = await client.get({ endpoint: "blogs" });
-  const data = await client.get({ endpoint: "blogs", queries: { offset: 0, limit: 3 } })
-
+// データを取得(カテゴリで検索)
+export const getStaticProps = async (context: { params: { id: string } }) => {
+  const id = context.params.id;
+  const data = await client.get({ endpoint: "blogs", queries: { filters: `category[equals]${id}` } });
   return {
     props: {
       blogs: data.contents,
@@ -70,4 +70,3 @@ export const getStaticProps = async () => {
     },
   };
 };
-
