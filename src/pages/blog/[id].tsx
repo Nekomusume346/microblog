@@ -6,15 +6,24 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import { AiFillTags } from 'react-icons/ai'
+import cheerio from 'cheerio';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/hybrid.css';
+// import SyntaxHighlighter from 'react-syntax-highlighter';
+// import { dark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
+
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
 type Props = {
   blog: Blog;
+  htmlcontent:string
 };
 
-const BlogId: React.FC<Props> = ({ blog }: Props) => {
+const BlogId: React.FC<Props> = ({ blog, htmlcontent }: Props) => {
+
   return (
+  
     <main className="flex justify-center items-center mx-auto w-full">
       <div>
           
@@ -55,44 +64,59 @@ const BlogId: React.FC<Props> = ({ blog }: Props) => {
 
           <div
             dangerouslySetInnerHTML={{
-              __html: `${blog.content}`,
+              __html: `${htmlcontent}`,
             }}
           />
+         
       </div>
 
     </main>
+
   );
 };
 
 export default BlogId;
 
-export const getServerSideProps: GetServerSideProps = async ctx => {
-  const id = ctx.params?.id;
-  const idExceptArray = id instanceof Array ? id[0] : id;
-  const data = await client.get({
-    endpoint: 'blogs',
-    contentId: idExceptArray,
-  });
 
+export const getStaticPaths = async () => {
+  const data = await client.get({ endpoint: "blogs" });
+
+  const paths = data.contents.map(
+    (content: { id: string }) => `/blog/${content.id}`
+  );
+  return { paths, fallback: false };
+};
+
+export const getStaticProps = async (context: { params: { id: string } }) => {
+  const id = context.params.id;
+  const data = await client.get({ endpoint: "blogs", contentId: id });
+  //console.log(data.content)
+
+  //シンタックスハイライト対応
+  const $ = cheerio.load(data.content);    // data.contentはmicroCMSから返されるリッチエディタ部分
+  $('pre code').each((_, elm) => {
+    const result = hljs.highlightAuto($(elm).text());
+    $(elm).html(result.value);
+    $(elm).addClass('hljs');
+  });
+  
+  //console.log($.html());    // ハイライト済みのHTML
   return {
     props: {
       blog: data,
+      htmlcontent: $.html(),
     },
   };
 };
 
-// export const getStaticPaths = async () => {
-//   const data = await client.get({ endpoint: "blogs" });
 
-//   const paths = data.contents.map(
-//     (content: { id: string }) => `/blog/${content.id}`
-//   );
-//   return { paths, fallback: false };
-// };
-
-// export const getStaticProps = async (context: { params: { id: string } }) => {
-//   const id = context.params.id;
-//   const data = await client.get({ endpoint: "blogs", contentId: id });
+// export const getServerSideProps: GetServerSideProps = async ctx => {
+//   const id = ctx.params?.id;
+//   const idExceptArray = id instanceof Array ? id[0] : id;
+//   const data = await client.get({
+//     endpoint: 'blogs',
+//     contentId: idExceptArray,
+//   });
 
 //   return {
 //     props: {
