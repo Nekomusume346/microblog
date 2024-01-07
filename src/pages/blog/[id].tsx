@@ -9,11 +9,20 @@ import { AiFillTags } from 'react-icons/ai'
 import cheerio from 'cheerio';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/hybrid.css';
+import { renderToc } from '@/libs/render-toc'; //目次コンポーネント
+import { TableOfContents }  from '@/components/TalbleOfContent'; 
+
 // import SyntaxHighlighter from 'react-syntax-highlighter';
 // import { dark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
+
+type TocItem = {
+  text: string;
+  htmltag: string;
+  id: string | undefined;
+}
 
 type Props = {
   blog: Blog;
@@ -21,14 +30,17 @@ type Props = {
 };
 
 const BlogId: React.FC<Props> = ({ blog, htmlcontent }: Props) => {
+  const toc: TocItem[] = renderToc(htmlcontent);
+
+  //console.log(toc);
 
   return (
   
-    <main className="flex justify-center items-center mx-auto w-full">
+    <article className="post-body flex justify-center items-center mx-auto w-full md:w-2/3 ">
       <div>
           
           <div>
-              <h1 className="lg:text-2xl text-xl py-3">{blog.title}</h1>
+              <h1>{blog.title}</h1>
               <p className="text-sm text-gray-600">
               {dayjs
                 .utc(blog.publishedAt)
@@ -61,6 +73,10 @@ const BlogId: React.FC<Props> = ({ blog, htmlcontent }: Props) => {
                   priority
               />
           </div>
+          
+          {blog.toc_visible && (
+          <TableOfContents toc={toc} />
+          )}        
 
           <div
             dangerouslySetInnerHTML={{
@@ -70,7 +86,7 @@ const BlogId: React.FC<Props> = ({ blog, htmlcontent }: Props) => {
          
       </div>
 
-    </main>
+    </article>
 
   );
 };

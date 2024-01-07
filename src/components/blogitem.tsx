@@ -2,10 +2,18 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Blog } from "@/types/blog";
+import { AiFillTags } from 'react-icons/ai'
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const BlogItem = (blog: Blog) => {
     return(
-        <div className="rounded overflow-hidden shadow-lg" >
+        <div className="rounded  overflow-hidden shadow-lg hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-600" >
+            <Link href={`/blog/${blog.id}`} passHref>
             <Image
                 className="w-full"
                 width={300}
@@ -14,18 +22,25 @@ const BlogItem = (blog: Blog) => {
                 alt={blog.title}
                 priority
             />
-            <div className="py-5  mx-1">
-                <p className='text-center text-xl  md:text-base  font-bold leading-5'>
+            <div className="py-5 mx-1 ">
+                <p className='createtime text-left text-gray-500 text-xs'>
+                    {dayjs
+                    .utc(blog.publishedAt)
+                    .tz("Asia/Tokyo")
+                    .format(
+                        "YYYY" +
+                        "/" +
+                        "MM" +
+                        "/" +
+                        "DD" 
+                    )
+                    }
+                </p>   
+                <p className='text-left '>
                     {blog.title}
-                </p>                      
+                </p>                     
             </div>
-            <div className='flex justify-center items-center mx-auto w-full pt-10 pb-5'>
-                <Link href={`/blog/${blog.id}`} passHref>
-                    <span className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-gray-700  hover:bg-gray-300  border border-gray-700">
-                    READ MORE                      
-                    </span>
-                </Link>
-            </div>
+            </Link>
         </div>
     )
 }

@@ -21,9 +21,7 @@ export default function Home({ blogs, totalCount }: Props) {
     <>
     <div className="container mx-auto p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5">
         {blogs.map((blog, index) => (
-          <div key={index}>
-              <BlogItem key={blog.id} {...blog} />   
-          </div>
+          <BlogItem key={index} {...blog} /> 
         ))}      
     </div>
 

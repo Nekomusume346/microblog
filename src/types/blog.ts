@@ -17,4 +17,5 @@ export type Blog = {
     }
     content:string;
     tag: string;
-  };
+    toc_visible: boolean;
+};

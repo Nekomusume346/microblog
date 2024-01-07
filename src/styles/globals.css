@@ -2,26 +2,100 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  background: #fffffd;
+  color: #0c0c0c;
+  font-family: Noto Sans JP,sans-serif;
+  line-height: 1.6;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+h1{
+  font-size: 1.6rem;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+@media screen and (max-width: 768px){
+  .post-body {
+      font-size: 1.4rem;
+      line-height: 1.6;
   }
 }
 
-body {
-  /* color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb)); */
+.post-body p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 1em 0;
 }
+
+.post-body h2 {
+  background: #fcebf0;
+  border-left: 8px solid #da003d;
+  color: #0c0c0c;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 6rem 0 3rem;
+  padding: 1.4rem 1.8rem 1.5rem 1.8rem;
+}
+
+.post-body h3 {
+  border-bottom: 3px solid #cecece;
+  color: #da003d;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 4.5rem 0 2.4rem;
+  padding: 0 0 1.0rem;
+}
+
+.post-body h4 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.4;
+  padding: 0 0 1.2rem;
+}
+
+
+/* microcms用カスタムclass */
+main .redfont{
+  color: red;
+}
+
+main .highlight{
+  background-color: yellow;
+}
+
+/* 目次用 */
+.tagstyle1{
+  font-size: 1.4em;
+}
+
+.tagstyle2{
+  font-size: 1.2em;
+  color: blue;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+.tagstyle3{
+  font-size: 1.0em;
+  padding: 0.1em 0.3em;
+  padding-left: 0.3em;
+}
+
+
+
+/*スマホ対応*/
+@media screen and (max-width:480px) { 
+  /*　画面サイズが480pxかまではここを読み込む　*/
+
+}
+@media screen and (min-width:768px) and ( max-width:1024px) {
+  /*　画面サイズが768pxから1024pxまではここを読み込む　*/
+
+}
+
