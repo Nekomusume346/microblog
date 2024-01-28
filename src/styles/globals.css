@@ -7,48 +7,43 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  background: #fffffd;
+  background: #f3f3f3;
   color: #0c0c0c;
-  font-family: Noto Sans JP,sans-serif;
+  font-family: Noto Sans JP,normal;
   line-height: 1.6;
 }
 
 h1{
-  font-size: 1.6rem;
-  line-height: 1.6;
+  font-size: 25px;
+  line-height: 43px;
   font-weight: 700;
+  font-family: Noto Sans JP,normal;
 }
 
-@media screen and (max-width: 768px){
-  .post-body {
-      font-size: 1.4rem;
-      line-height: 1.6;
-  }
-}
 
 .post-body p {
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 24px;
   margin: 1em 0;
 }
 
 .post-body h2 {
-  background: #fcebf0;
-  border-left: 8px solid #da003d;
+  /* background: #fcebf0; */
+  border-left: 8px solid #0099e3;
   color: #0c0c0c;
-  font-size: 1.6rem;
+  font-size: 20px;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 26px;
   margin: 6rem 0 3rem;
-  padding: 1.4rem 1.8rem 1.5rem 1.8rem;
+  padding: 1.4rem 1.6rem 1.2rem 1.6rem;
 }
 
 .post-body h3 {
   border-bottom: 3px solid #cecece;
-  color: #da003d;
-  font-size: 1.4rem;
+  color: #0c0c0c;
+  font-size: 16px;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 24px;
   margin: 4.5rem 0 2.4rem;
   padding: 0 0 1.0rem;
 }
@@ -60,6 +55,20 @@ h1{
   padding: 0 0 1.2rem;
 }
 
+ /*　画面サイズが480pxまではここを読み込む　*/
+@media screen and (max-width: 480px){
+  .post-body {
+      font-size: 1.2rem;
+      line-height: 1.6;
+  }
+  .post-body h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.0;
+    border-left: 8px solid #0099e3;
+    padding: 1.2rem 1rem 1rem 1.2rem;
+  }
+}
 
 /* microcms用カスタムclass */
 main .redfont{
@@ -87,15 +96,18 @@ main .highlight{
   padding-left: 0.3em;
 }
 
+ /*　画面サイズが480pxまではここを読み込む　*/
+ @media screen and (max-width: 480px){
+  .tagstyle1{
+    font-size: 1.2em;
+  }
+  
+  .tagstyle2{
+    font-size: 0.9em;
+  }
+  .tagstyle3{
+    font-size: 0.8em;
+  }
 
-
-/*スマホ対応*/
-@media screen and (max-width:480px) { 
-  /*　画面サイズが480pxかまではここを読み込む　*/
-
-}
-@media screen and (min-width:768px) and ( max-width:1024px) {
-  /*　画面サイズが768pxから1024pxまではここを読み込む　*/
-
-}
+ }
 

@@ -4,8 +4,10 @@ import Pagination from '@/components/pagination';
 import { client } from "@/libs/client";
 import { Blog } from "@/types/blog";
 import BlogItem from '@/components/blogitem';
+import Meta from '@/components/meta'; 
 
 const PER_PAGE = 3; 
+const pageTitle = "記事一覧";
 
 type Props = {
     blogs: Blog[];
@@ -14,8 +16,16 @@ type Props = {
 
 // pages/blog/[id].js
 export default function BlogPageId({ blogs, totalCount }: Props) {
+
+  const pageTitle = "投稿記事";
+  const pageDesc ="";
+  const pageImg = "";
+  const pageImgW = 0;
+  const pageImgH = 0;
+  
   return (
     <>
+    <Meta pageTitle={pageTitle}  pageDesc={pageDesc} pageImg={pageImg} pageImgW={pageImgW} pageImgH={pageImgH}  />
     <div className="container mx-auto p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5">
         {blogs.map((blog, index) => (
           <BlogItem key={index} {...blog} /> 

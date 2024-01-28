@@ -18,6 +18,8 @@ const BlogItem = (blog: Blog) => {
                 className="w-full"
                 width={300}
                 height={200}
+                sizes="100vw"
+                layout="responsive"
                 src={blog.eyecatch.url}
                 alt={blog.title}
                 priority

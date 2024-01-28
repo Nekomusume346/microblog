@@ -8,13 +8,16 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 //import styles from "@/styles/Post.module.css";
 import Image from "next/image";
+import Head from "next/head";
 
 type Props = {
   blog: Blog[];
 };
 
 const Posts: React.FC<Props> = ({ blog }) => {
+
   return (
+<>
     <div>
       <div className="">
         <ul className="">
@@ -46,6 +49,7 @@ const Posts: React.FC<Props> = ({ blog }) => {
         </ul>
       </div>
     </div>
+</>
   );
 };
 

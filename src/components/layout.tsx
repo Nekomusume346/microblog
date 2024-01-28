@@ -1,6 +1,6 @@
 
-import Footer from '../components/footer'
-import Nav2 from '../components/nav2'
+import Footer from './footer'
+import Nav2 from './nav2'
 import { FC, ReactNode } from 'react';
 
 type Props = {

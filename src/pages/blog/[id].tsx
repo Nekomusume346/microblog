@@ -11,6 +11,7 @@ import hljs from 'highlight.js';
 import 'highlight.js/styles/hybrid.css';
 import { renderToc } from '@/libs/render-toc'; //目次コンポーネント
 import { TableOfContents }  from '@/components/TalbleOfContent'; 
+import Meta from '@/components/meta'; 
 
 // import SyntaxHighlighter from 'react-syntax-highlighter';
 // import { dark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
@@ -26,16 +27,32 @@ type TocItem = {
 
 type Props = {
   blog: Blog;
-  htmlcontent:string
+  htmlcontent:string;
 };
 
+// MetaProps型の定義
+// type MetaProps = {
+//   pageTitle: string;
+//   pageDesc: string;
+//   pageImg: string;
+//   pageImgW: number;
+//   pageImgH: number;
+// };
+
 const BlogId: React.FC<Props> = ({ blog, htmlcontent }: Props) => {
+
   const toc: TocItem[] = renderToc(htmlcontent);
+  const pageTitle = "投稿記事";
+  const pageDesc ="";
+  const pageImg = "";
+  const pageImgW = 0;
+  const pageImgH = 0;
 
   //console.log(toc);
 
   return (
-  
+    <>
+    <Meta pageTitle={pageTitle}  pageDesc={pageDesc} pageImg={pageImg} pageImgW={pageImgW} pageImgH={pageImgH}  />
     <article className="post-body flex justify-center items-center mx-auto w-full md:w-2/3 ">
       <div>
           
@@ -64,14 +81,18 @@ const BlogId: React.FC<Props> = ({ blog, htmlcontent }: Props) => {
               </p>
           </div>
           <div className="py-10">
+              <figure>
               <Image
                   className="w-full"
                   width={1000}
                   height={800}
                   src={blog.eyecatch.url}
                   alt={blog.title}
+                  layout='responsive'
+                  sizes="100vw"
                   priority
               />
+              </figure>
           </div>
           
           {blog.toc_visible && (
@@ -87,7 +108,7 @@ const BlogId: React.FC<Props> = ({ blog, htmlcontent }: Props) => {
       </div>
 
     </article>
-
+    </>
   );
 };
 

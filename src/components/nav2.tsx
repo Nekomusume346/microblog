@@ -9,12 +9,12 @@ export const Nav2: React.FC  = () => {
             <div className="w-full flex items-center justify-center py-4">
             <Link 
                 href="/"
-                aria-label="WowBlog"
-                title="WowBlog"
+                aria-label="DigitalDreamNote"
+                title="DigitalDreamNote"
                 className="inline-flex items-center"
             >
                 <div >
-                    <h1><Image src={logo} alt="logo" className='w-96'/></h1>
+                    <h1><Image src={logo} alt="logo" className='lg:w-96 w-72'/></h1>
                 </div>
             </Link>
             </div>
