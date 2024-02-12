@@ -20,7 +20,6 @@ h1{
   font-family: Noto Sans JP,normal;
 }
 
-
 .post-body p {
   font-size: 16px;
   line-height: 24px;
@@ -31,11 +30,11 @@ h1{
   /* background: #fcebf0; */
   border-left: 8px solid #0099e3;
   color: #0c0c0c;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 600;
   line-height: 26px;
   margin: 6rem 0 3rem;
-  padding: 1.4rem 1.6rem 1.2rem 1.6rem;
+  padding: 1.0rem 1.0rem 1.2rem 1.4rem;  /* 上下左右 */
 }
 
 .post-body h3 {

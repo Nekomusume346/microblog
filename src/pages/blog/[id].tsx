@@ -12,6 +12,9 @@ import 'highlight.js/styles/hybrid.css';
 import { renderToc } from '@/libs/render-toc'; //目次コンポーネント
 import { TableOfContents }  from '@/components/TalbleOfContent'; 
 import Meta from '@/components/meta'; 
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 
 // import SyntaxHighlighter from 'react-syntax-highlighter';
 // import { dark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
@@ -30,16 +33,8 @@ type Props = {
   htmlcontent:string;
 };
 
-// MetaProps型の定義
-// type MetaProps = {
-//   pageTitle: string;
-//   pageDesc: string;
-//   pageImg: string;
-//   pageImgW: number;
-//   pageImgH: number;
-// };
 
-const BlogId: React.FC<Props> = ({ blog, htmlcontent }: Props) => {
+const BlogId: React.FC<Props> =  ({ blog, htmlcontent }: Props) =>  {
 
   const toc: TocItem[] = renderToc(htmlcontent);
   const pageTitle = "投稿記事";
@@ -48,14 +43,13 @@ const BlogId: React.FC<Props> = ({ blog, htmlcontent }: Props) => {
   const pageImgW = 0;
   const pageImgH = 0;
 
-  //console.log(toc);
 
+  //console.log(toc);
   return (
     <>
     <Meta pageTitle={pageTitle}  pageDesc={pageDesc} pageImg={pageImg} pageImgW={pageImgW} pageImgH={pageImgH}  />
     <article className="post-body flex justify-center items-center mx-auto w-full md:w-2/3 ">
-      <div>
-          
+      <div>         
           <div>
               <h1>{blog.title}</h1>
               <p className="text-sm text-gray-600">
@@ -80,31 +74,31 @@ const BlogId: React.FC<Props> = ({ blog, htmlcontent }: Props) => {
                 </span>
               </p>
           </div>
-          <div className="py-10">
-              <figure>
-              <Image
+          <div className="py-10 ">
+              <figure className="py-10">
+                <LazyLoadImage
                   className="w-full"
-                  width={1000}
-                  height={800}
-                  src={blog.eyecatch.url}
                   alt={blog.title}
-                  layout='responsive'
+                  src={blog.eyecatch.url}
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                  }}
                   sizes="100vw"
-                  priority
+                  effect="blur"
+                  placeholder={<Image src={blog.eyecatch.url} width={1280} height = {720} alt="Loading..." />}
               />
               </figure>
           </div>
-          
+
           {blog.toc_visible && (
           <TableOfContents toc={toc} />
           )}        
-
           <div
             dangerouslySetInnerHTML={{
               __html: `${htmlcontent}`,
             }}
           />
-         
       </div>
 
     </article>
@@ -113,7 +107,6 @@ const BlogId: React.FC<Props> = ({ blog, htmlcontent }: Props) => {
 };
 
 export default BlogId;
-
 
 export const getStaticPaths = async () => {
   const data = await client.get({ endpoint: "blogs" });
@@ -145,6 +138,7 @@ export const getStaticProps = async (context: { params: { id: string } }) => {
     },
   };
 };
+
 
 
 // export const getServerSideProps: GetServerSideProps = async ctx => {
