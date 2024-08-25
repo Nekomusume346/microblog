@@ -44,7 +44,7 @@ export default function Home({ blogs, totalCount }: Props) {
 // データをテンプレートに受け渡す部分の処理を記述します
 export const getStaticProps = async () => {
   //const data = await client.get({ endpoint: "blogs" });
-  const data = await client.get({ endpoint: "blogs", queries: { offset: 0, limit: 3 } })
+  const data = await client.get({ endpoint: "blogs", queries: { offset: 0, limit: 12 } })
 
   return {
     props: {

@@ -7,7 +7,7 @@ import BlogItem from '@/components/blogitem';
 import { load } from 'cheerio';
 import hljs from 'highlight.js';
 
-const PER_PAGE = 3; 
+//const PER_PAGE = 3; 
 
 type Props = {
     blogs: Blog[];
