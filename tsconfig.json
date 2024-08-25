@@ -6,6 +6,10 @@
       "dom.iterable",
       "esnext"
     ],
+    "types": [
+      "node",
+      "cheerio"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,

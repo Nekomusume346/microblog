@@ -1,3 +1,5 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "ignorePatterns": "server.js"  // server.jsファイルをESLintの解析対象から除外
 }
+
